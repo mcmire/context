@@ -5,7 +5,7 @@ module Test
         # Tweaks to standard method so we don't get superclass methods and we don't
         # get weird default tests
         def suite # :nodoc:
-          method_names = public_instance_methods(false)
+          method_names = public_instance_methods - superclass.public_instance_methods
     
           tests = method_names.delete_if {|method_name| method_name !~ /^test./}
           suite = Test::Unit::TestSuite.new(name)
@@ -24,7 +24,7 @@ module Test
     class TestSuite
       # Runs the tests and/or suites contained in this
       # TestSuite.
-      def run(result, &progress_block)
+      def run(result, &progress_block) # :nodoc:
         yield(STARTED, name)
         ivars_from_callback = @tests.first.run_all_callbacks(:before) if @tests.first.is_a?(Test::Unit::TestCase)
         @tests.each do |test|

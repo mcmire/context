@@ -1,5 +1,5 @@
-class Test::Unit::TestCase
-  class << self
+module Context
+  module Context
     # Test::Unit uses ObjectSpace to figure out what Test::Unit:TestCase instances are running
     # Contexts are not named and therefore sometimes get garbage collected.
     # Think of #context_list as the shelter for nameless contexts
@@ -49,6 +49,8 @@ class Test::Unit::TestCase
       # puts "Creating context #{cls.context_name}"
       cls.class_eval(&block)
       (self.context_list ||= []) << cls
+      
+      const_set("Test#{name.to_class_name}#{cls.object_id.abs}", cls)
       cls
     end
 
