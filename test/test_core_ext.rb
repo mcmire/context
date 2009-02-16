@@ -7,7 +7,7 @@ class TestCoreExt < Test::Unit::TestCase
     end
 
     it "should be converted to class name" do
-      assert_equal 'ThisIsFunYes_', "this is fun - (yes)!".to_class_name
+      assert_equal 'ThisIsFunYes_', "this is fun... - (yes)!".to_class_name
     end
     
     it "should be downcased when converted" do
