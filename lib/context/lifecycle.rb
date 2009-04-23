@@ -89,9 +89,9 @@ class Test::Unit::TestCase
     end
   rescue Object => exception
     raise <<-BANG
-Error running the #{callback_type}(:all) callback for #{name}
-#{exception.class.name}: #{exception.message}
-#{exception.backtrace.join("\n")}
+  Error running the #{callback_type}(:all) callback for #{name}
+  #{exception.class.name}: #{exception.message}
+  #{exception.backtrace.join("\n")}
     BANG
   end
 

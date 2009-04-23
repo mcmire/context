@@ -3,7 +3,7 @@ class String
   # Also replace dangerous punctuation
   def to_method_name
     downcased = self.downcase
-    downcased.gsub!(/[\s:',;!#\-\(\)\.\?]+/,'_')
+    downcased.gsub!(/[\s:',\.~;!#=\-\(\)\?]+/,'_')
     downcased
   end
   
