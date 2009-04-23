@@ -1,4 +1,4 @@
-class String
+module Context::String
   # Replaces spaces and tabs with _ so we can use the string as a method name
   # Also replace dangerous punctuation
   def to_method_name
@@ -22,4 +22,8 @@ class String
     meth_name.gsub!(/(?:^|_)(.)/) { $1.upcase }
     meth_name
   end
+end
+
+class String
+  include Context::String
 end
