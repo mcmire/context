@@ -7,7 +7,11 @@ module Context
 
   def self.setup(test_case)
     if core_class
-      raise ArgumentError, "Currently, you're not allowed to run Context.setup on multiple test classes.  Require 'context/core' and pick ONE class."
+      if core_class == test_case
+        return
+      else
+        raise ArgumentError, "Currently, you're not allowed to run Context.setup again and clobber '#{core_class.name}'.  Require 'context/core' and pick ONE class."
+      end
     end
 
     self.core_class = test_case
