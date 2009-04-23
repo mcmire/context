@@ -75,7 +75,6 @@ module Context
       def context(name, &block)
         cls = Class.new(self)
         cls.context_name = name
-        # puts "Creating context #{cls.context_name}"
       
         # Care about Rails tests in nested contexts
         cls.tests($1.constantize) if defined?(Rails) && 

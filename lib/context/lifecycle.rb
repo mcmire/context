@@ -56,22 +56,16 @@ module Context
       child.after_each_callbacks    = []
       child.after_all_callbacks     = []
       child.before_should_callbacks = {}
-    
+
       child.class_eval do
         def setup(&block)
           super
-          
-          unless self.class.before_should_callbacks[method_name].nil?
-            instance_eval(&self.class.before_should_callbacks[method_name])
-          end
-    
-          run_each_callbacks :before
+          run_context_before_callbacks
         end
     
         def teardown
           super
-    
-          run_each_callbacks :after
+          run_context_after_callbacks
         end
       end if self == ::Context.core_class
     end
@@ -79,7 +73,8 @@ module Context
 
   module TestCase
     def run_each_callbacks(callback_type) # :nodoc:
-      self.class.gather_callbacks(callback_type, :each).each do |c| 
+      self.class.gather_callbacks(callback_type, :each).each do |c|
+        next if !c
         c.is_a?(Proc) ? instance_eval(&c) : send(c)
       end
     end
@@ -97,11 +92,24 @@ module Context
     #{exception.backtrace.join("\n")}
       BANG
     end
-    
+
     def set_values_from_callbacks(values) # :nodoc:
       values.each do |name, value|
         instance_variable_set name, value
       end
+    end
+
+    private
+    def run_context_before_callbacks
+      unless self.class.before_should_callbacks[method_name].nil?
+        instance_eval(&self.class.before_should_callbacks[method_name])
+      end
+
+      run_each_callbacks :before
+    end
+
+    def run_context_after_callbacks
+      run_each_callbacks :after
     end
   end
 end

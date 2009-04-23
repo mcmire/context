@@ -1,6 +1,11 @@
 require File.dirname(__FILE__) + '/test_helper.rb'
 
-class TestContext < Test::Unit::TestCase
+class CustomTest < Test::Unit::TestCase
+  def setup
+  end
+end
+
+class TestContext < CustomTest
   def test_can_write_tests_without_context
     assert true
   end

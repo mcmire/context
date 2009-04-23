@@ -8,7 +8,6 @@ module Context::TestCase::ClassMethods
   #
   def test(name, opts={}, &block)
     test_name = ["test:", context_name, name].reject { |n| n == "" }.join(' ')
-    # puts "running test #{test_name}"
     defined = instance_method(test_name) rescue false
     raise "#{test_name} is already defined in #{self}" if defined
 
