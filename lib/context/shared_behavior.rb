@@ -12,7 +12,7 @@ module Context
     end
   
     def included(arg) # :nodoc:
-      @_behavior.call
+      arg.instance_eval(&@_behavior)
     end
   end
 end

@@ -3,7 +3,7 @@ require 'context/version'
 AUTHOR = 'Jeremy McAnally'  # can also be an array of Authors
 EMAIL = "jeremy@entp.com"
 DESCRIPTION = "Contexts and DSL sugar for your tests"
-GEM_NAME = 'context' # what ppl will type to install your gem
+GEM_NAME = 'mcmire-context' # what ppl will type to install your gem
 RUBYFORGE_PROJECT = 'context' # The unix name for your project
 HOMEPATH = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
 DOWNLOAD_PATH = "http://rubyforge.org/projects/#{RUBYFORGE_PROJECT}"
